@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div class="app">
+      {{message}}
+    </div>
+    <script src="libs/dist/vue.min.js"></script>
+    <script>
+      var exampleData = {
+        message:'hello World'
+      }
+      new Vue({
+          el:'.app',
+          data: exampleData
+        });
+    </script>
+  </body>
+</html>
