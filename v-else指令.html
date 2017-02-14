@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div class="app">
+      <p v-if='message'>{{message}}</p>
+      <p v-else='!message'>请输入消息提示</p>
+      <input type="text" v-model="message">
+      <div v-show="yes">
+        哈哈哈
+      </div>
+      <div v-else="!yes">
+        啦啦啦
+      </div>
+    </div>
+    <script src="libs/dist/vue.min.js"></script>
+    <script>
+      var exampleData = {
+        message:'hello World',
+        yes:true
+      }
+      new Vue({
+          el:'.app',
+          data: exampleData
+        });
+    </script>
+  </body>
+</html>

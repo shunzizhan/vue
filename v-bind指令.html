@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <!-- <link rel="stylesheet" href="styles/demo.css" /> -->
+        <style>
+            .pagination li{
+                float: left;
+                width: 30px;
+                list-style-type: none;
+            }
+            li a.active{
+                color:#fff;
+                background-color: #007dd4;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="person in people">
+                        <td v-model:innerHTML='person.name'></td>
+                        <td>{{ person.age  }}</td>
+                        <td>{{ person.sex  }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li v-for="n in pageCount">
+                    <a href="javascripit:void(0)" v-bind:class="activeNumber === n  ? 'active' : ''">{{ n  }}</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script src="libs/dist/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                people: [{
+                    name: 'Jack',
+                    age: 30,
+                    sex: 'Male'
+                }, {
+                    name: 'Bill',
+                    age: 26,
+                    sex: 'Male'
+                }, {
+                    name: 'Tracy',
+                    age: 22,
+                    sex: 'Female'
+                }, {
+                    name: 'Chris',
+                    age: 36,
+                    sex: 'Male'
+                }],
+                activeNumber: 1,
+                pageCount: 10
+            }
+        })
+    </script>
+
+</html>
