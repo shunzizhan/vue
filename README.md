@@ -24,8 +24,8 @@
 
 ### v-for指令
 > v-for指令基于一个数组渲染一个列表，它和JavaScript的遍历语法相似：
-> v-for="item in items"
-> items是一个数组，item是当前被遍历的数组元素。
+> v-for="item in items" 
+> items是一个数组，item是当前被遍历的数组元素。 
 
 ### v-bind指令
 > v-bind指令可以在其名称后面带一个参数，中间放一个冒号隔开，这个参数通常是HTML元素的特性（attribute），例如：v-bind:class
