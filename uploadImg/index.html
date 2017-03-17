@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>帐户设置-修改头像</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <link rel="shortcut icon" href="/favicon.ico"> 
+</head>
+<body>
+
+
+    <div class="my-focus-content" style="text-align: center;padding: 40px 0 60px;">
+      <div id="sourceUrl"></div>
+      <p id="swfContainer">
+              <!--本组件需要安装Flash Player后才可使用，请从<a href="http://www.adobe.com/go/getflashplayer">这里</a>下载安装。-->
+      </p>
+    </div>
+
+
+  <script src="http://test.uc.fdc.com.cn/js/lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="fullAvatarEditor/swfobject.js"></script>
+  <script type="text/javascript" src="fullAvatarEditor/fullAvatarEditor.js"></script>
+  <script>
+    $(function(){
+      var params={
+        url:"http://test.uc.fdc.com.cn/ucaction/ucaction.user.modifyavatar?sourceFrom=1",
+        userid:'1366043',
+        sourceUrl:$("#sourceUrl").text()
+      }
+      swfobject.addDomLoadEvent(function () {
+        //以下两行代码正式环境下请删除
+        // if(location.href.indexOf('http://') == -1)
+        // alert('请于WEB服务器环境中查看、测试！\n\n既 http://*/simpleDemo.html\n\n而不是本地路径 file:///*/simpleDemo.html的方式');
+        var swf = new fullAvatarEditor("fullAvatarEditor.swf", "expressInstall.swf", "swfContainer", {
+            id : 'swf',
+            //upload_url : 'Upload.asp?userid=999&username=looselive',
+            upload_url : params.url+"&userid="+params.userid,
+              //上传接口
+            method : 'post',  //传递到上传接口中的查询参数的提交方式。更改该值时，请注意更改上传接口中的查询参数的接收方式
+            src_upload : 1,   //是否上传原图片的选项，有以下值：0-不上传；1-上传；2-显示复选框由用户选择
+            src_url:params.sourceUrl,
+            avatar_box_border_width : 0,
+            avatar_sizes : '100*100|50*50|32*32',
+            avatar_sizes_desc : '100*100像素|50*50像素|32*32像素'
+          }, function (msg) {
+            switch(msg.code)
+            {
+              case 1 :
+              case 2 :
+              case 3 :
+                break;
+              case 5 :
+                // alert(""+msg.content.sourceUrl);//原图地址
+                // alert(""+msg.content.avatarUrl);//头像地址
+                $("#sourceUrl").text(msg.content.sourceUrl);
+                $('.user-pic').attr("src",msg.content.avatarUrl);
+              break;
+            }
+          }
+        );
+    });
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div id="app-7">
+      <ol>
+        <!-- 现在我们为每个todo-item提供待办项对象    -->
+        <!-- 待办项对象是变量，即其内容可以是动态的 -->
+        <todo-item v-for="item in groceryList" v-bind:todo="item" :mytext="item.text | capitalize(item.text)"></todo-item>
+      </ol>
+      <div>
+        <silde-item  v-for="item in groceryList" :mydata="item"></silde-item>
+      </div>
+    </div>
+    <script src="libs/dist/vue.min.js"></script>
+    <script src="component/component.js"></script>
+    <script>
+      // var exampleData = {
+      //   message:'hello World',
+      //   yes:true
+      // }
+      // new Vue({
+      //     el:'.app',
+      //     data: exampleData
+      //   });
+      var app7 = new MyComponent({
+        el: '#app-7',
+        data: {
+          groceryList: [
+            { id:1,text: '蔬菜' },
+            { id:2,text: '奶酪' },
+            { id:3,text: '随便其他什么人吃的东西' }
+          ]
+        }
+      })
+    </script>
+  </body>
+</html>
