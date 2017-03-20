@@ -11,6 +11,10 @@
 ## 基本语法
 > [可下载](https://github.com/vuejs/vue-devtools),压缩版已集成，直接在控制台中可以修改数据模型，改变视图
 
+### v-model指令
+> input框的双向绑定
+> v-if="expression"
+
 ### v-if指令
 > v-if是条件渲染指令，它根据表达式的真假来`删除和插入`元素，它的基本语法如下：
 > v-if="expression"
@@ -38,6 +42,40 @@
 ```
 
 ## 自定义指令
+```html
+    <div id="app-7">
+      <ol>
+        <!-- 现在我们为每个todo-item提供待办项对象    -->
+        <!-- 待办项对象是变量，即其内容可以是动态的 -->
+        <todo-item v-for="item in groceryList" v-bind:todo="item" :mytext="item.text | capitalize(item.text)"></todo-item>
+      </ol>
+      <div>
+        <silde-item  v-for="item in groceryList" :mydata="item"></silde-item>
+      </div>
+    </div>
+    <script src="libs/dist/vue.min.js"></script>
+    <script src="component/component.js"></script>
+    <script>
+      // var exampleData = {
+      //   message:'hello World',
+      //   yes:true
+      // }
+      // new Vue({
+      //     el:'.app',
+      //     data: exampleData
+      //   });
+      var app7 = new MyComponent({
+        el: '#app-7',
+        data: {
+          groceryList: [
+            { id:1,text: '蔬菜' },
+            { id:2,text: '奶酪' },
+            { id:3,text: '随便其他什么人吃的东西' }
+          ]
+        }
+      })
+    </script>
+```
 ```javaScript
 Vue.component('todo-item', {
   // todo-item 组件现在接受一个
@@ -77,6 +115,10 @@ var MyComponent = Vue.extend({
 ```
 
 ## [计算属性](https://cn.vuejs.org/v2/guide/computed.html#基础例子)
+
+### 基础例子
+
+  计算属性是基于它们的依赖进行缓存的 
 ```html
   <div id="example">
     <p>Original message: "{{ message }}"</p>
@@ -100,4 +142,215 @@ var MyComponent = Vue.extend({
       }
     })
   </script>
+```
+
+### Methods
+  只要发生重新渲染，method 调用总会执行该函数
+```html
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <p>Computed message Add '哈哈哈哈': "{{ addMessage }}"</p>
+  </div>
+  <script src="libs/dist/vue.min.js"></script>
+  <script>
+    var vm = new Vue({
+      el:'#example',
+      data:{
+        'message':'hello'
+      },
+      methods:{
+        reversedMessage:function(){
+          return this.message.split('').reverse().join('');
+        },
+        addMessage:function(){
+          return this.message+"哈哈哈";
+        }
+      }
+    })
+  </script>
+```
+### Watched
+  建议用computed取代
+```html
+    <div id="example">
+      <p>firstName: <input type="text" v-model="firstName" ></p>
+      <p>lastName: <input type="text" v-model="lastName"></p>
+      <p>fullName: {{ fullName }}</p>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:'#example',
+        data:{
+          'firstName':'张三',
+          'lastName':'李四',
+          'fullName':'张三李四'
+        },
+        watch: {
+          firstName: function (val) {
+            this.fullName = val + ' ' + this.lastName
+          },
+          lastName: function (val) {
+            this.fullName = this.firstName + ' ' + val
+          }
+        },
+        // computed: {
+        //   fullName: function () {
+        //     return this.firstName + ' ' + this.lastName
+        //   }
+        // }
+      })
+    </script>
+```
+
+### setter
+```html
+    <div id="example">
+      <p>firstName: <input type="text" v-model="firstName" ></p>
+      <p>lastName: <input type="text" v-model="lastName"></p>
+      <p>fullName: <input type="text" v-model="fullName"></p>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:'#example',
+        data:{
+          'firstName':'张三',
+          'lastName':'李四',
+          'fullName':''
+        },
+        computed: {
+          fullName: {
+            // getter
+            get: function () {
+              return this.firstName + '-' + this.lastName
+            },
+            // setter
+            set: function (newValue) {
+              var names = newValue.split('-')
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            }
+          }
+        }
+      })
+    </script>
+```
+
+### Watchers
+
+
+## [Style](https://cn.vuejs.org/v2/guide/class-and-style.html)
+
+### class
+```html
+    <style>
+      .active{
+        color:#007dd4;
+      }
+      .text-danger{
+        color:#f00;
+      }
+    </style>
+    <div id="example">
+      <div v-bind:class="{ active: isActive }">我是高亮</div>
+      <div class="static"
+           v-bind:class="{ active: isActive, 'text-danger': hasError }">我是警告
+      </div>
+      <div v-bind:class="classObject">我是computed计算出来的</div>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data: {
+          isActive: true,
+          hasError: true,
+          error: null
+        },
+        computed: {
+          classObject: function () {
+            return {
+              active: this.isActive && !this.error,
+              'text-danger': this.error && this.error.type === 'fatal',
+            }
+          }
+        }
+      })
+    </script>
+```
+
+### 数组语法
+以把一个数组传给 v-bind:class ，以应用一个 class 列表
+```html
+  <div :class="[activeClass, errorClass]">我是样式数组demo</div>
+  <div v-bind:class="[isActive ? activeClass : '', errorClass]"> //当条件判断太多 比较混乱 改进为3
+  <div v-bind:class="[{ active: isActive }, errorClass]"> //推荐
+
+  <style>
+    .active{
+      color:#007dd4;
+    }
+    .text-danger{
+      color:#f00;
+    }
+  </style>
+  <div id="example">
+    <div :class="[activeClass, errorClass]">我是样式数组demo</div>
+    <div :class="[isActive ? activeClass : '', errorClass]">我是条件判断的数组样式</div>
+    <div :class="[{ active: isActive }, errorClass]">我是条件判断的数组样式2</div>
+  </div>
+  <script src="/libs/dist/vue.min.js"></script>
+  <script>
+    var vm = new Vue({
+      el:"#example",
+      data: {
+        activeClass: 'active',
+        errorClass: 'text-danger',
+        isActive:true,
+        
+      }
+    })
+  </script>
+  
+  <div id="example">
+    <div class="active text-danger">我是样式数组demo</div> 
+    <div class="active text-danger">我是条件判断的数组样式</div> 
+    <div class="active text-danger">我是条件判断的数组样式2</div>
+  </div>
+```
+
+### 组件上使用
+```html
+    <div id="example">
+      <my-component class="baz boo"></my-component>
+      <my-component :class="{active:isActive}"></my-component>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+      })
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          isActive:true
+        }
+      })
+    </script>
+
+
+    <div id="example"><p class="foo bar baz boo">Hi</p> <p class="foo bar active">Hi</p></div>
+```
+
+## [列表](https://cn.vuejs.org/v2/guide/list.html)
+### 基础
+  在 v-for 块中，我们拥有对父作用域属性的完全访问权限。 v-for 还支持一个可选的`第二个参数为当前项的索引`。
+```html
+  <ul id="example-2">
+    <li v-for="(item, index) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+  </ul>
 ```

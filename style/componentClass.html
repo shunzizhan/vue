@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example">
+      <my-component class="baz boo"></my-component>
+      <my-component :class="{active:isActive}"></my-component>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+      })
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          isActive:true
+        }
+      })
+    </script>
+  </body>
+</html>

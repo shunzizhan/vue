@@ -1,0 +1,30 @@
+<html>
+  <head></head>
+  <body>
+    <style>
+      .active{
+        color:#007dd4;
+      }
+      .text-danger{
+        color:#f00;
+      }
+    </style>
+    <div id="example">
+      <div :class="[activeClass, errorClass]">我是样式数组demo</div>
+      <div :class="[isActive ? activeClass : '', errorClass]">我是条件判断的数组样式</div>
+      <div :class="[{ active: isActive }, errorClass]">我是条件判断的数组样式2</div>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data: {
+          activeClass: 'active',
+          errorClass: 'text-danger',
+          isActive:true,
+          
+        }
+      })
+    </script>
+  </body>
+</html>

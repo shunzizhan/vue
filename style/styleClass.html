@@ -1,0 +1,23 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example">
+      <div :style="{color:activeColor,fontSize: fontSize + 'px'}">我是内联样式</div>
+      <div :style="styleObject">我是内联样式2</div>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          activeColor:'red',
+          fontSize:'30',
+          styleObject:{
+            color:'blue',
+            fontSize:'24px'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

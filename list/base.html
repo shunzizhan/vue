@@ -1,0 +1,23 @@
+<html>
+  <head></head>
+  <body>
+    <ul id="example">
+      <li v-for="(item,index) in items">{{index}}-{{item.message}}</li>
+    </ul>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          items:[{
+            message:'哇哈哈',
+            key:'001'
+          },{
+            message:'哈哈哇',
+            key:'002'
+          }]
+        }
+      })
+    </script>
+  </body>
+</html>

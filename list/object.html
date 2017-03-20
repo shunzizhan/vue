@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body>
+    <ul id="example">
+      <li v-for="(item,key) in items">{{key}}-{{item}}</li>
+    </ul>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          items:{
+            name:"shunzizhan",
+            email:"shunzizhan@163.com",
+            sex:"man"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

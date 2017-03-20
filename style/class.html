@@ -1,0 +1,39 @@
+<html>
+  <head></head>
+  <body>
+    <style>
+      .active{
+        color:#007dd4;
+      }
+      .text-danger{
+        color:#f00;
+      }
+    </style>
+    <div id="example">
+      <div v-bind:class="{ active: isActive }">我是高亮</div>
+      <div class="static"
+           v-bind:class="{ active: isActive, 'text-danger': hasError }">我是警告
+      </div>
+      <div v-bind:class="classObject">我是computed计算出来的</div>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data: {
+          isActive: true,
+          hasError: true,
+          error: null
+        },
+        computed: {
+          classObject: function () {
+            return {
+              active: this.isActive && !this.error,
+              'text-danger': this.error && this.error.type === 'fatal',
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
