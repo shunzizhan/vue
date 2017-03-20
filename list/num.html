@@ -1,0 +1,23 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example">
+      <span v-for="n in 10">{{ n }}</span>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          items:[{
+            message:'哇哈哈',
+            key:'001'
+          },{
+            message:'哈哈哇',
+            key:'002'
+          }]
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -354,3 +354,83 @@ var MyComponent = Vue.extend({
     </li>
   </ul>
 ```
+### 对象迭代-v-for
+  你也可以提供第二个的参数为键名
+  第三个参数为索引
+```html
+  <div v-for="(value, key, index) in object">
+    {{ index }}. {{ key }} : {{ value }}
+  </div>
+```
+### 整数迭代-v-for
+```html
+  <div>
+    <span v-for="n in 10">{{ n }}</span>
+  </div>
+```
+### 数组更新检测
+Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新。这些方法如下：
+- push()
+- pop()
+- shift()
+- unshift()
+- splice()
+- sort()
+- reverse() 
+```html
+    <div id="example">
+      <span v-for="n in myArr">{{ n }}</span>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          myArr:[1,2,3,4,5,6,7,8,9,10]
+        }
+      })
+      setTimeout(function(){
+        vm.myArr.push(11);
+      },2000)
+    </script>
+```
+### 重塑数组
+非变异(non-mutating method)方法，例如： filter(), concat(), slice() 。这些不会改变原始数组，但总是返回一个新数组。当使用非变异方法时，可以用`新数组替换旧数组`：
+```html
+  <div id="example">
+    <span v-for="n in myArr">{{ n }}</span>
+  </div>
+  <script src="/libs/dist/vue.min.js"></script>
+  <script>
+    var vm = new Vue({
+      el:"#example",
+      data:{
+        myArr:[1,2,3,4,5,6,7,8,9,10]
+      }
+    })
+    // setTimeout(function(){
+    //   vm.myArr.push(11);
+    // },2000)
+    vm.myArr = vm.myArr.filter(function(item) {
+      return item>5;
+    });
+  </script>
+```
+**注意事项**
+由于 JavaScript 的限制， Vue 不能检测以下变动的数组
+  - 当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue
+  - 当你修改数组的长度时，例如： vm.items.length = newLength
+为了解决第一类问题，以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果， 同时也将触发状态更新：
+```javaScript
+  // Vue.set
+  Vue.set(example1.items, indexOfItem, newValue)
+```
+```javaScript
+  // Vue.set
+  example1.items.splice(indexOfItem, 1, newValue)
+```
+为了解决第二类问题，你也同样可以使用 splice：
+```javaScript
+  // Vue.set
+  example1.items.splice(newLength)
+```

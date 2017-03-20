@@ -1,0 +1,23 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example">
+      <span v-for="n in myArr">{{ n }}</span>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          myArr:[1,2,3,4,5,6,7,8,9,10]
+        }
+      })
+      // setTimeout(function(){
+      //   vm.myArr.push(11);
+      // },2000)
+      vm.myArr = vm.myArr.filter(function(item) {
+        return item>5;
+      });
+    </script>
+  </body>
+</html>
