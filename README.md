@@ -37,3 +37,67 @@
 <a v-on:click="doSomething">
 ```
 
+## 自定义指令
+```javaScript
+Vue.component('todo-item', {
+  // todo-item 组件现在接受一个
+  // "prop"，类似于一个自定义属性
+  // 这个属性名为 todo。
+  props: ['todo','mytext'],
+  // template: '<li v-bind="id = todo.id">{{mytext}}</li>'
+  template: '<li v-bind:id= "todo.id">{{mytext}}</li>'
+})
+Vue.component('silde-item', {
+  // todo-item 组件现在接受一个
+  // "prop"，类似于一个自定义属性
+  // 这个属性名为 todo。
+  props: ['mydata'],
+  // template: '<li v-bind="id = todo.id">{{mytext}}</li>'
+  template: '<p v-bind:id= "mydata.id">{{mydata.text}}</p>'
+})
+```
+
+## [过滤器](https://cn.vuejs.org/v2/guide/syntax.html#过滤器)
+```javaScript
+var MyComponent = Vue.extend({
+  // 扩展选项
+  filters: {
+    capitalize: function (item) {
+      if (!item) {
+        return ''
+      }else{
+        // value = value.toString()
+        // return value.charAt(0).toUpperCase() + value.slice(2)
+        // item.text += "哈哈哈" ;
+        return item + "哈哈哈" ;
+      }
+    }
+  }
+})
+```
+
+## [计算属性](https://cn.vuejs.org/v2/guide/computed.html#基础例子)
+```html
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <p>Computed message Add '哈哈哈哈': "{{ addMessage }}"</p>
+  </div>
+  <script src="libs/dist/vue.min.js"></script>
+  <script>
+    var vm = new Vue({
+      el:'#example',
+      data:{
+        'message':'hello'
+      },
+      computed:{
+        reversedMessage:function(){
+          return this.message.split('').reverse().join('');
+        },
+        addMessage:function(){
+          return this.message+"哈哈哈";
+        }
+      }
+    })
+  </script>
+```
