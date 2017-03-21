@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example-1">
+      <span>Multiline message is:</span>
+      <p style="white-space: pre">{{ message }}</p>
+      <br>
+      <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example-1',
+        data: {
+          counter: 0,
+          message:""
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div id="example">
+    <input type="radio" id="a" value="A" class="1" v-model="chose" />
+    <label for="a">A</label>
+    <input type="radio" id="b" value="B" class="1" v-model="chose" />
+    <label for="b">B</label>
+    <input type="radio" id="c" value="C" class="1" v-model="chose" />
+    <label for="c">C</label>
+
+     <br>
+    <span>Picked: {{ chose }}</span>
+  </div>
+  <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example',
+        data: {
+          counter: 0,
+          message:"",
+          checked:false,
+          checkedNames:[],
+          chose:"A"
+        }
+      })
+    </script>
+</body>
+</html>

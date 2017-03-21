@@ -1,0 +1,36 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example-1">
+      <p>普通的</p>
+      <input type="text" name="" v-model="message" value="" placeholder="edit me">
+      <p>Message is:{{message}}</p>
+
+      <p>lazy修饰 从而转变为在 change 事件中同步</p>
+      <input type="text" name="" v-model.lazy="lazymessage" value="" placeholder="edit me">
+      <p>Message is:{{lazymessage}}</p>
+
+      <p>number修饰 如果想自动将用户的输入值转为 Number 类型</p>
+      <input v-model.number="age" type="number">
+      <p>age is:{{age}}</p>
+
+      <p>trim修饰 如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入：</p>
+      <input v-model.trim="msg">
+      <p>msg is:{{msg.length}}</p>
+
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example-1',
+        data: {
+          counter: 0,
+          message:"",
+          lazymessage:"",
+          age:null,
+          msg:""
+        }
+      })
+    </script>
+  </body>
+</html>

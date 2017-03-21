@@ -1,0 +1,30 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example-1">
+      <input type="checkbox" id="a" v-model="checked" />
+      <label for="a">{{checked}}</label>
+
+      <input
+        type="checkbox"
+        id="b"
+        v-model="toggle"
+        v-bind:true-value="a"
+        v-bind:false-value="b"
+      >
+      <label for="b">{{toggle}}</label>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example-1',
+        data: {
+          counter: 0,
+          message:"",
+          checked:false,
+          toggle:""
+        }
+      })
+    </script>
+  </body>
+</html>

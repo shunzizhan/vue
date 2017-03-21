@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div id="example">
+    <select class="1" v-model="selected">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+
+    <span>Selected: {{ selected }}</span>
+  </div>
+
+  <div id="example2">
+    <select class="1" multiple v-model="selected2">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+
+    <span>Selected: {{ selected2 }}</span>
+  </div>
+
+  <div id="example3">
+    <select class="1" v-model="selected3">
+      <option v-for="item in items" :value="item.key">{{item.text}}</option>
+    </select>
+    <span>Selected: {{ selected3 }}</span>
+  </div>
+  <script src="/libs/dist/vue.min.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        selected: null
+      }
+    })
+
+    var vm2 = new Vue({
+      el: '#example2',
+      data: {
+        selected2:[]
+      }
+    })
+
+    var vm2 = new Vue({
+      el: '#example3',
+      data: {
+        selected3:"1",
+        items:[{key:1,text:"A"},{key:2,text:"B"},{key:3,text:"C"}]
+      }
+    })
+  </script>
+</body>
+</html>
