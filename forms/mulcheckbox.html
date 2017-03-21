@@ -1,0 +1,30 @@
+
+
+<html>
+  <head></head>
+  <body>
+    <div id="example-1">
+      <input type="checkbox" id="a" value="1" v-model="checkedNames" />
+      <label for="a">1</label>
+      <input type="checkbox" id="b" value="2" v-model="checkedNames" />
+      <label for="b">2</label>
+      <input type="checkbox" id="c" value="3" v-model="checkedNames" />
+      <label for="c">3</label>
+
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example-1',
+        data: {
+          counter: 0,
+          message:"",
+          checked:false,
+          checkedNames:[]
+        }
+      })
+    </script>
+  </body>
+</html>
