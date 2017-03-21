@@ -1,0 +1,27 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+      <p>Computed message Add '哈哈哈哈': "{{ addMessage }}"</p>
+    </div>
+    <script src="libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el:'#example',
+        data:{
+          'message':'hello'
+        },
+        methods:{
+          reversedMessage:function(){
+            return this.message.split('').reverse().join('');
+          },
+          addMessage:function(){
+            return this.message+"哈哈哈";
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

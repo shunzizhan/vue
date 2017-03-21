@@ -1,0 +1,18 @@
+<html>
+  <head></head>
+  <body>
+    <div id="example-1">
+      <button v-on:click="counter += 1">增加 1</button>
+      <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#example-1',
+        data: {
+          counter: 0
+        }
+      })
+    </script>
+  </body>
+</html>
