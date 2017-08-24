@@ -1,0 +1,50 @@
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="test.less">
+  </head>
+  <body>
+    <div id="example">
+      <div v-if="flag" class="landscape-body">
+         小主，您真棒，已经横屏~~~{{flag}}
+      </div>
+      <div v-else class="portrait-body">
+        小主，横屏效果更好，把您的设备开启横屏体验吧3333333333~~~{{flag}}
+      </div>
+    </div>
+    <script src="/libs/dist/vue.min.js"></script>
+    <script>
+
+      
+
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          flag:true
+        },
+        created:function(){
+          var _this = this;
+          window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+            _this.orientationFun();
+          }, false);
+          _this.orientationFun();
+        },
+        methods:{
+          orientationFun:function(){
+            var width_doc = screen.width;
+            var height_doc =  screen.height; //文档流的高度
+                // var _height =  screen.height; //屏幕的高度
+            // if (window.orientation == 180 || window.orientation == 0) {
+            if(width_doc>height_doc){
+              this.flag = true;
+            }else{
+               this.flag = false;
+            }
+            // if (window.orientation == 90 || window.orientation == -90 ){
+            //   this.flag = false;
+            // }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
