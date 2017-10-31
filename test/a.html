@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>a标签延迟转跳</title>
+	<style>
+		a{
+			display: block;
+		}
+		.active{
+			
+			color:#f00;
+		}
+	</style>
+</head>
+<body>
+	<a href="http://www.strinitys.com.cn/dist/#/design/main/0">哈哈哈</a>
+	<a href="https://github.com/shunzizhan">github</a>
+	<a href="http://www.fdc.com.cn/">房地产</a>
+	<script src="http://img3.fdc.com.cn/m/js/lib/zepto/zepto.min.js"></script>
+
+	<script>
+		// $('a').mouseup(function(event){
+		// 	event.stopPropagation();//阻止冒泡
+  //  		event.preventDefault();//阻止浏览器默认事件
+		// 	$(this).addClass(active);
+		// 	var _link = $(this).attr(href);
+		// 	setTimeout(function(){
+		// 		window.location.href = _link
+		// 	},2000)
+		// })
+		$('a').touchstart(function(){
+			$(this).addClass(active);
+		})
+	</script>
+</body>
+</html>

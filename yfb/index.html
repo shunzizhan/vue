@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="applicable-device" content="mobile">
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta name="x5-orientation" content="portrait"/>
+  <meta name="x5-fullscreen" content="true"/>
+  <meta name="x5-page-mode" content="app"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0"/>
+  <title>亿房宝版本升级</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="main">
+    <h1 class="text-center">亿房宝版本升级</h1>
+    <h2>历史版本记录</h2>
+    <div class="tab-main">
+      <ul class="version-container">
+        <li class="version-header">
+          <span class="w-20">版本号</span>
+          <span class="w-20">版本名称</span>
+          <span class="w-50">描述</span>
+          <span class="w-10">操作</span>
+        </li>
+        <li class="version-list" v-for="item in versionList" :id="item.v" >
+          <span class="w-20">{{item.v}}</span>
+          <span class="w-20">{{item.vName}}</span>
+          <span class="w-50 text-left"><a style="text-decoration: none;" :title="item.updateDesc">{{item.updateDesc || "没有升级描述"}}</a></span>
+          <span class="w-10" v-on:click="activeVersion(item.v)">激活</span>
+        </li>
+      </ul>
+    </div>
+    <h2>新增版本</h2>
+    <div class="group margin-r cf">
+      <span>版本号</span>
+      <input type="text" v-model="params.v" placeholder="请输入版本号">
+    </div>
+    <div class="group">
+      <span>版本号名称</span>
+      <input type="text" v-model="params.vName" placeholder="请输入版本号名称">
+    </div>
+    <div class="group margin-r">
+      <span>是否强制升级</span>
+      <select name="" id="" v-model="params.isForce">
+        <option value="true">是</option>
+        <option value="false">否</option>
+      </select>
+    </div>
+    <div class="group">
+      <span>是否安装界面</span>
+      <select name="" id="" v-model="params.isAutoInstall">
+        <option value="true">是</option>
+        <option value="false">否</option>
+      </select>
+    </div>
+    <div class="group margin-r">
+      <span>是否忽略该版本</span>
+      <select name="" id="" v-model="params.isIgnorable">
+        <option value="true">是</option>
+        <option value="false">否</option>
+      </select>
+    </div>
+    <div class="cf">
+      <span class="">下载渠道</span>
+      <ul class="partner">
+        <li v-for="(item,index) in partnerList">
+          <span v-html="item.partner"></span>
+          <input :id="item.partnerId" type="file" accept="aplication/apk" name="file" v-on:change="uploadImg(item.partnerId,index,$event)"/>
+        </li>
+      </ul>
+    </div>
+    <div class="desc prelative cf ">
+      <span class="pabsolute">升级描述</span>
+      <textarea class="updateDesc pabsolute" v-model="params.updateDesc" name="" cols="60" rows="10" placeholder="请输入修改描述"></textarea>  
+    </div>
+
+    <div class="text-center">
+      <button class="btn" v-on:click="save">提交</button>
+    </div>
+  </div>
+  <script src="dist/vue.min.js"></script>
+  <script src="dist/vue-resource.min.js"></script>
+  <script>
+    var exampleData = {
+      message:'hello World'
+    }
+    Vue.filter('removeRepeat', function(item,_obj) {
+      var _index = document.getElementById(_obj);
+      if(_index){
+        return ;
+      }else{
+        return item;
+      }
+    });
+    new Vue({
+        el:'.main',
+        data: {
+          versionList:[],
+          params:{
+            v:"1.0.0" ,//版本号
+            vName:"亿房宝",//版本号名称
+            updateDesc:"",//升级描述
+            isForce:true,//是否强制升级(true、false)
+            isAutoInstall:true,//是否自动跳转到安装界面(true、false)
+            isIgnorable:true//是否忽略该版本(true、false)
+          },
+          partnerList:[{
+            partnerId:"001",
+            partner:"百&nbsp;度",
+            apkUrl:"",
+            signMethod:"md5",
+            sign:"",
+            appSize:""
+          },{
+            partnerId:"002",
+            partner:"豌豆荚",
+            apkUrl:"",
+            signMethod:"md5",
+            sign:"",
+            appSize:""
+          },{
+            partnerId:"003",
+            partner:"应用宝",
+            apkUrl:"",
+            signMethod:"md5",
+            sign:"",
+            appSize:""
+          }]
+        },
+        created:function(){
+          var _this = this;
+          _this.$http.get('http://test.homeapi.fdc.com.cn/router/rest?method=appupgrade.getall&size=5').then(function(res){
+            _this.versionList = res.data.data;
+            // _this.processData(res.data.data,'v');
+          }, function(res){
+            console.log("获取版本列表失败");
+          })
+        },
+        methods:{
+          processData:function(arr,_arg1){
+            var _this = this,arr1 = _this.versionList;
+            for(var i=0;i<arr.length;i++){
+              for(var j=0;j<arr1.length;j++){
+
+              }
+            }
+          },
+          save:function(event){
+            var _this = this;
+            var data = _this.partnerList;
+            for(var i=0;i<data.length;i++){
+              if(data[i].apkUrl){
+                _this.updateApk(data[i])
+              }
+            }
+          },
+          activeVersion:function(ver){
+             var _this = this;
+            _this.$http.get('http://test.homeapi.fdc.com.cn/router/rest?method=appupgrade.active&v='+ver).then(function(res){
+              alert('已激活版本'+ver);
+            }, function(res){
+              console.log("激活版本失败");
+            })
+          },
+          updateApk:function(data){
+            var _this = this;
+            var config = {
+              "method":'appupgrade.setversion',
+              "v": _this.params.v,
+              "vName": _this.params.vName,
+              "isautoinstall": _this.params.isAutoInstall,
+              "isforce": _this.params.isForce,
+              "isignorable": _this.params.isIgnorable,
+
+              "apkUrl": data.apkUrl,
+              "appSize": data.appSize,
+              "partner": data.partner,
+              "partnerId": data.partnerId,
+              "sign": data.sign,
+              "signMethod": data.signMethod,
+
+              "updateDesc": _this.params.updateDesc
+              
+            };
+            _this.$http.get('http://test.homeapi.fdc.com.cn/router/rest',{params:config}).then(function(res){
+              alert("更新版本成功");
+              console.log(res.data.version);
+            }, function(res){
+              console.log(res.data.version);
+            })
+          },
+          uploadImg:function(id,index,event){
+            var _this = this;
+            var formData = new FormData();
+            // formData.append("file", event.target.files[0]);
+            formData.append("inputname", event.target.files[0]);
+            formData.append("method", 'housemarket.image.upload');
+            // 实例化一个AJAX对象
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function(res) {
+              console.log("上传文件成功！");
+              var data = JSON.parse(res.target.response);
+              _this.partnerList[index].apkUrl = data.data;
+              _this.partnerList[index].sign = data.sign;
+              _this.partnerList[index].appSize = data.appSize;
+            }
+            // xhr.open("POST", "http://test.homeapi.fdc.com.cn/appupgrade/appupgrade.upload", true);
+            xhr.open("POST", "http://hm.tst.fdc.com.cn/router/rest", true);
+            // xhr.setRequestHeader("POWERED-BY-MENGXIANHUI", "Approve");  
+            // xhr.setRequestHeader("Content-Type", "application/xml");  
+            // xhr.onreadystatechange = 'handler';  
+            // 发送表单数据
+            xhr.send(formData);
+          }
+        }
+    });
+  </script>
+</body>
+</html>

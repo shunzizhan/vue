@@ -1,0 +1,71 @@
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="test.less">
+  </head>
+  <body>
+    <div id="example">
+      <div v-if="flag" class="landscape-body">
+        <div class="start-bg">
+          <img src="img/start_bg.jpg" alt="" width="100%" height="100%">
+          <em class="ico ico-skip f-r"></em>
+          <div class="video-body">
+            <div class="video-item">
+              <img src="img/video_left.jpg" alt="">
+              <a class="ico ico-video" href="#/start/play"></a>
+            </div>
+            <div class="video-item">
+              <img src="img/video_right.jpg" alt="">
+              <em class="ico ico-video"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="portrait-body">
+        <img src="img/start_bg_2.jpg" alt="" width="100%" height="100%">
+        <div class="video-body">
+          <div class="video-item">
+            <img src="img/video_right_2.jpg" alt="">
+          </div>
+          <div class="video-item">
+            <img src="img/video_left_2.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./libs/vue.min.js"></script>
+    <script>
+
+      
+
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          flag:true
+        },
+        created:function(){
+          var _this = this;
+          window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+            _this.orientationFun();
+          }, false);
+          _this.orientationFun();
+        },
+        methods:{
+          orientationFun:function(){
+            var width_doc = screen.width;
+            var height_doc =  screen.height; //文档流的高度
+                // var _height =  screen.height; //屏幕的高度
+            // if (window.orientation == 180 || window.orientation == 0) {
+            if(width_doc>height_doc){
+              this.flag = true;
+            }else{
+               this.flag = false;
+            }
+            // if (window.orientation == 90 || window.orientation == -90 ){
+            //   this.flag = false;
+            // }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
