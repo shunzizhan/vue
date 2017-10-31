@@ -107,7 +107,7 @@ fis.match("*", {
     //     })
     // })
     // 将less文件编译成css
-    .match('/css/*.less', {
+    .match('*.less', {
         parser: fis.plugin('less'),
         rExt: '.css'
     })

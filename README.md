@@ -3,8 +3,8 @@
   
 > Vue.js是当下很火的一个JavaScript MVVM库，它是以数据驱动和组件化的思想构建的。相比于Angular.js，Vue.js提供了更加简洁、更易于理解的API，使得我们能够快速地上手并使用Vue.js。
 
-## 步骤
-- 定义View
+## 步骤 
+- 定义View  
 - 定义Model
 - 创建一个Vue实例或"ViewModel"，它用于连接View和Model
 
@@ -544,3 +544,19 @@ Vue.config.keyCodes.f1 = 112
 ```html
 <input v-model.trim="msg">
 ```
+
+## 组件
+### 模版解析说明
+>当使用 DOM 作为模版时（例如，将 el 选项挂载到一个已存在的元素上）, 你会受到 HTML 的一些限制，因为 Vue 只有在浏览器解析和标准化 HTML 后才能获取模版内容。尤其像这些元素 <ul> ， <ol>， <table> ， <select> 限制了能被它包裹的元素， <option> 只能出现在其它元素内部。
+
+### data-必须是函数
+通过Vue构造器传入的各种选项大多数都可以在组件里用。 `data 是一个例外，它必须是函数`。
+```javaScript
+  Vue.component('my-component', {
+    template: '<span>{{ message }}</span>',
+    data: {
+      message: 'hello'
+    }
+  })
+```
+那么 Vue 会停止，并在控制台发出警告，告诉你在组件中 data 必须是一个函数。

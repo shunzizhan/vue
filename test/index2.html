@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      html{
+        font-size: 100px;
+      }
+      #example{
+        font-size: 35px;
+        width: 100vw;
+        height: 100vh;
+      }
+      .ico-back{
+        position: fixed;
+        left: 90vw;
+        top: 85vh;
+        height: 5vw;
+        width: 5vw;
+        line-height: 5vw;
+        text-align: center;
+        background-color: rgba(0,0,0,.3);
+        color: #fff;
+        border-radius: 50%;
+        font-size:2vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example">
+      <div v-if="flag" class="landscape-body">
+         小主，您真棒，已经横屏~~~{{flag}}
+      </div>
+      <div v-else class="portrait-body">
+        小主，横屏效果更好，把您的设备开启横屏体验吧3333333333~~~{{flag}}
+      </div>
+      <em class="ico ico-back" v-on:click="goBack()" v-on:touchmove="touchmoveBack($event)">返回</em>
+    </div>
+    <script src="./lib/vue.min.js"></script>
+    <script>
+
+
+
+      var vm = new Vue({
+        el:"#example",
+        data:{
+          flag:true,
+          backEl:"",
+          _width:"",
+          _height:""
+        },
+        created:function(){
+          // var _this = this;
+          // window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+          //   _this.orientationFun();
+          // }, false);
+          // _this.orientationFun();
+        },
+        mounted:function(){
+          alert(111);
+          var _this = this;
+          window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize",function(){
+            _this.orientationFun();
+          })
+          _this.orientationFun();
+          _this.backEl = document.getElementsByClassName('ico-back');
+          _this._height = window.screen.availHeight;
+          _this._width = window.screen.availWidth;
+        },
+        methods:{
+          orientationFun:function(){
+            var width_doc = screen.width;
+            var height_doc =  screen.height; //文档流的高度
+                // var _height =  screen.height; //屏幕的高度
+            if (window.orientation == 90 || window.orientation == -90) {
+            // if(width_doc>height_doc){
+              this.flag = true;
+            }else{
+               this.flag = false;
+            }
+            // if (window.orientation == 90 || window.orientation == -90 ){
+            //   this.flag = false;
+            // }
+          },
+          touchmoveBack:function(event){
+            // console.log(event.currentTarget);
+            event.stopPropagation();//阻止冒泡
+            event.preventDefault();//阻止浏览器默认事件
+            var endX = event.targetTouches[0].pageX-20;
+            var endY = event.targetTouches[0].pageY-20;
+            endX = Math.min(Math.max(endX,0),this._width);
+            endY = Math.min(Math.max(endY,0),this._height);
+            // alert(this.backEl[0].style);
+            // alert("left:"+endX+"px;top:"+endY+"px;");
+            this.backEl[0].style = "left:"+endX+"px;top:"+endY+"px;";
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
