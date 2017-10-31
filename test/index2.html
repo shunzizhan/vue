@@ -23,67 +23,48 @@
         border-radius: 50%;
         font-size:2vw;
       }
-      @media screen and (orientation:portrait) {
-        .landscape-body{
-          display: none;
-        }
-        .portrait-body{
-          display: block;
-        }
-      }
-      @media screen and (orientation:landscape) {
-        .landscape-body{
-          display: block;
-        }
-        .portrait-body{
-          display: none;
-        }
-      }
     </style>
   </head>
   <body>
     <div id="example">
-      <div class="landscape-body">
+      <div v-if="flag" class="landscape-body">
          小主，您真棒，已经横屏~~~{{flag}}
-         ios上 拖拽那个返回键
-
       </div>
-      <div class="portrait-body">
+      <div v-else class="portrait-body">
         小主，横屏效果更好，把您的设备开启横屏体验吧3333333333~~~{{flag}}
-        ios上 拖拽那个返回键
       </div>
       <em class="ico ico-back" v-on:click="goBack()" v-on:touchmove="touchmoveBack($event)">返回</em>
     </div>
     <script src="./lib/vue.min.js"></script>
     <script>
 
-      
+
 
       var vm = new Vue({
         el:"#example",
         data:{
-          flag: true,
+          flag:true,
           backEl:"",
-          width:"",
-          height:""
+          _width:"",
+          _height:""
         },
         created:function(){
-         
-        },
-        mounted:function(){
-          var _this = this;
+          // var _this = this;
           // window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
-          // window.addEventListener("onorientationchange", function() {
           //   _this.orientationFun();
           // }, false);
-          // // window.addEventListener("visibilitychange",function(){
-          // //     _this.orientationFun();
-          // // })
           // _this.orientationFun();
-
+        },
+        mounted:function(){
+          alert(111);
+          var _this = this;
+          window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize",function(){
+            _this.orientationFun();
+          })
+          _this.orientationFun();
           _this.backEl = document.getElementsByClassName('ico-back');
-          _this.height = window.screen.availHeight;
-          _this.width = window.screen.availWidth;
+          _this._height = window.screen.availHeight;
+          _this._width = window.screen.availWidth;
         },
         methods:{
           orientationFun:function(){
@@ -100,25 +81,17 @@
             //   this.flag = false;
             // }
           },
-          goBack:function(){
-            // this.backEl[0].style = "top:20px;";
-            window.history.back();
-            return false;
-          },
           touchmoveBack:function(event){
             // console.log(event.currentTarget);
             event.stopPropagation();//阻止冒泡
             event.preventDefault();//阻止浏览器默认事件
             var endX = event.targetTouches[0].pageX-20;
             var endY = event.targetTouches[0].pageY-20;
-            endX = Math.min(Math.max(endX,0),this.width);
-            endY = Math.min(Math.max(endY,0),this.height);
-            // alert(this.backEl[0].style.top);
+            endX = Math.min(Math.max(endX,0),this._width);
+            endY = Math.min(Math.max(endY,0),this._height);
+            // alert(this.backEl[0].style);
             // alert("left:"+endX+"px;top:"+endY+"px;");
-            // this.backEl[0].style = "left:"+endX+"px;top:"+endY+"px;";
-            this.backEl[0].style.left = endX+"px";
-            this.backEl[0].style.top = endY+"px";
-
+            this.backEl[0].style = "left:"+endX+"px;top:"+endY+"px;";
           }
         }
       })
