@@ -1,9 +1,7 @@
-import child from './common/child.vue'
-
+import child from '@/components/common/child.vue'
 export default {
-  name: 'hello',
-  data () {
-    console.log(new Date());
+  name: 'app',
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App',
       title: '标题',
@@ -13,11 +11,11 @@ export default {
   components: {
     'vc-message': child
   },
-  mounted () {
+  mounted() {
     this.title = 'Hello world shunzizhan'
   },
   methods: {
-    setMessage (msg) {
+    setMessage(msg) {
       this.message = msg
     }
   }

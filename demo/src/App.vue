@@ -3,21 +3,11 @@
     <!-- <img src="./assets/logo.png">
     <router-view/> -->
     <h1>{{title}}</h1>
-    <!-- <vc-message :message = 'message'></vc-message> -->
+    <vc-message :message = 'message' @changeMsg = 'setMessage'></vc-message>
   </div>
 </template>
 
-<script>
-  export default {
-  name: 'app',
-  data () {
-    return {
-      title: '标题',
-      message: '这是子组件'
-    }
-  }
-}
-</script>
+<script src='./a'></script>
 
 <style>
 #app {
