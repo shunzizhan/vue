@@ -1,21 +1,11 @@
+<style src="./style/common.less" lang="less"></style>
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png">
     <router-view/> -->
-    <h1>{{title}}</h1>
-    <vc-message class="hh" :message = 'message' @changeMsg = 'setMessage'></vc-message>
+    <h1 class="hide">{{title}}</h1>
+    <vc-message class="hh hide" :message = 'message' @changeMsg = 'setMessage'></vc-message>
+    <imgbox></imgbox>
   </div>
 </template>
-
 <script src='./a'></script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

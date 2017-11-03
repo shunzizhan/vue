@@ -1,0 +1,173 @@
+/*
+ *  reset.less 重置部分
+ */
+
+html {
+  font-size: 100px;
+  font-family: '微软雅黑', 'Arial', 'Helvetica', 'microsoft yahei', 'sans-serif';
+  background: #f2f2f2;
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0
+}
+
+body {
+  // margin: 0 auto;
+  font-size: 12px;
+  color: #333; 
+  min-width: 320px;
+  max-width: 750px;
+  margin: 0 auto;
+  min-height: 100%;
+  background-color: #fff; // -webkit-text-size-adjust: none;
+}
+
+html,
+input,
+textarea,
+button {
+  // font-size: 14px;
+  font-family: '微软雅黑', 'Arial', 'Helvetica', 'microsoft yahei', 'sans-serif';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+pre,
+hr,
+input,
+button,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+html,
+body,
+img,
+input,
+textarea,
+button {
+  border: 0 none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+i {
+  font-weight: normal;
+  font-style: normal;
+}
+
+textarea {
+  overflow: auto;
+  resize: none;
+}
+
+input,
+textarea {
+  outline: 0 none;
+  background: #fff;
+}
+
+button {
+  display: block;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: @font-color;
+  .transition(color, .2s);
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+
+/*处理 placeholder*/
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: @font-lighter;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: @font-lighter;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: @font-lighter;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: @font-lighter;
+}
+
+.f-l {
+  float: left !important;
+  display: inline-block;
+}
+
+.f-r {
+  float: right !important;
+  display: inline-block;
+}
+
+.f-n {
+  float: none !important;
+}
+
+.cf:before,
+.cf:after {
+  content: "";
+  display: table
+}
+
+.cf:after {
+  clear: both
+}
+
+.cf {
+  zoom: 1
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.text-center {
+  text-align: center;
+}

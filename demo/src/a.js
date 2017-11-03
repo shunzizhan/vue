@@ -1,4 +1,5 @@
 import child from '@/components/common/child.vue'
+import imgbox from '@/components/common/imgbox/imgbox.vue'
 export default {
   name: 'app',
   data () {
@@ -9,7 +10,8 @@ export default {
     }
   },
   components: {
-    'vc-message': child
+    'vc-message': child,
+    'imgbox':imgbox
   },
   mounted () {
     this.title = 'Hello world shunzizhan'
