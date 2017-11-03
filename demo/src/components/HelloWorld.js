@@ -3,7 +3,7 @@ import child from './common/child.vue'
 export default {
   name: 'hello',
   data () {
-    console.log(new Date());
+    // console.log(new Date());
     return {
       msg: 'Welcome to Your Vue.js App',
       title: '标题',

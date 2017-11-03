@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{msg}}</h1>
-    <h1>{{title}}</h1>
+    <h2>{{title}}</h2>
     <vc-message :message = 'message'></vc-message>
   </div>
 </template>

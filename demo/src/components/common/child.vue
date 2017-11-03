@@ -1,7 +1,8 @@
 <template>
 	<div>
-		<div>{{message}}</div>
-		<p v-on:click="changeMsg()">更新文本</p>
+		<div class="child">shunzizhan</div>
+		<div class="child2">{{message}}</div>
+		<button  id="myclick" v-on:click="changeMsg()">更新文本</button >
 	</div>
 </template>
 

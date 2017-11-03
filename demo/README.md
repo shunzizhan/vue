@@ -1,6 +1,6 @@
 # demo
 
-> karma & vue test project
+> A Vue.js project
 
 ## Build Setup
 

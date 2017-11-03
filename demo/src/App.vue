@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png">
     <router-view/> -->
     <h1>{{title}}</h1>
-    <vc-message :message = 'message' @changeMsg = 'setMessage'></vc-message>
+    <vc-message class="hh" :message = 'message' @changeMsg = 'setMessage'></vc-message>
   </div>
 </template>
 
