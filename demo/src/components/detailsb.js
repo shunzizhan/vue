@@ -1,7 +1,7 @@
-import child from './common/child.vue'
+// import child from './common/child.vue'
 
 export default {
-  name: 'hello',
+  name: 'detail',
   data () {
     // console.log(new Date());
     return {
@@ -10,9 +10,9 @@ export default {
       message: '这是子组件'
     }
   },
-  components: {
-    'vc-message': child
-  },
+  // components: {
+  //   'vc-message': child
+  // },
   mounted () {
     this.title = 'Hello world shunzizhan'
   },
