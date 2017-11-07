@@ -2,8 +2,14 @@
   <div id="app">
     <!-- <img src="./assets/logo.png">
     <router-view/> -->
+    <select name="" id="" v-model="curLang" @change="changeLang()">
+      <option value="zh">中文</option>
+      <option value="en">英文</option>
+    </select>
     <h1>{{title}}</h1>
-    <vc-message class="hh" :message = 'message' @changeMsg = 'setMessage'></vc-message>
+    <p>{{$t('userInfo.name')}}</p>
+    <p>{{$t('message.msg')}}</p>
+    <vc-message class="hh" :message="$t('ss')" @changeMsg = 'setMessage'></vc-message>
   </div>
 </template>
 

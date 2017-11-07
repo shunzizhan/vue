@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 
-import {HelloWorldRoutes} from '@/components/HelloWorld.routes'
+// import {HelloWorldRoutes} from '@/components/HelloWorld.routes'
 
 // Vue.use(Router)
 
@@ -23,8 +23,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorldRoutes
+      name: 'Hello'
+      // component: HelloWorldRoutes
     }
   ]
 })
